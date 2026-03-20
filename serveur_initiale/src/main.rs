@@ -2,8 +2,11 @@ use std::net::{TcpListener, TcpStream}; // Pour créer le serveur et gérer les 
 use std::io::{Read, Write}; // Pour lire et écrire sur le stream
 
 fn handle_client(mut stream: TcpStream) {
+    loop {
+        
+    
     // Cette fonction traite un client unique
-    let mut buffer = [0; 512]; // Buffer pour recevoir les données (512 octets max)
+    let mut buffer = [0; 10012]; // Buffer pour recevoir les données (512 octets max)
     
     // Lire les données envoyées par le client
     let bytes_read = stream.read(&mut buffer).expect("Erreur lors de la lecture du client");
@@ -16,7 +19,7 @@ fn handle_client(mut stream: TcpStream) {
     let response = format!("Serveur a reçu : {}", received);
     stream.write(response.as_bytes()).expect("Erreur lors de l'envoi de la réponse");
 }
-
+}
 fn main() {
     // Créer le listener TCP sur l'adresse locale et le port 7878
     let listener = TcpListener::bind("127.0.0.1:7878").expect("Impossible de lier le serveur au port");
